@@ -1,6 +1,17 @@
 class RecipesController < ApplicationController
+
+  before_action :find_recipe, only: [:show, :edit, :update, :destroy]
+
   def index
-    @recipes = Recipe.all
+     @recipes_list = Recipe.all
+    if params[:search]
+      @recipes  = Recipe.find_by(name: params[:search])
+    else
+      @recipes = Recipe.all
+    end
+  end
+
+  def show
   end
 
   def new
@@ -10,6 +21,23 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.create(strong_recipes_params)
     redirect_to recipes_path
+  end
+
+  def edit
+  end
+
+  def update
+    @recipe.update(strong_recipes_params)
+    redirect_to recipes_path
+  end
+
+  def destroy
+    @recipe.delete
+    redirect_to recipes_path
+  end
+
+  def find_recipe
+    @recipe = Recipe.find(params[:id])
   end
 
 

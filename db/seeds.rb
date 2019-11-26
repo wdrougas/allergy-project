@@ -5,3 +5,14 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+User.destroy_all
+Recipe.destroy_all
+
+
+jose = User.create(:name => "Jose")
+will = User.create(:name => "Will")
+
+
+chicken_teri = Recipe.create(:name => "Chicken Teriyaki", :user_id => jose.id)
+pizza = Recipe.create(:name => "Pizza", :user_id => will.id)
